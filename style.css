@@ -1,76 +1,69 @@
 body {
-    padding: 20px;
-    background-color: blanchedalmond;
-    font-family: "Onest", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 222;
-    font-style: normal;
-}
-
-.project__section {
-    width: 100%;
-    margin: 40px 0;
-    background-color: deepskyblue;
-    border-radius: 5px; 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
+    background:
+        linear-gradient(
+            to bottom,
+            #444 0%,
+            #444 80%,
+            #fff 80%,
+            #fff 82%,
+            #444 82%,
+            #444 100%
+        ),
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 40px,
+            yellow 40px,
+            yellow 50px
+        );
+    background-size: 100% 100%, 10px 100px;
+    background-repeat: no-repeat, repeat;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    height: 3000px;
 }
 
 .project__heading {
-    color: green;
+    font-size: 36px;
+    text-align: center;
 }
 
-.project__desc {
-    width: 49%;
-    display: inline-block; 
-    margin: 0;
-    font-weight: 900;
+
+.project__containter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.video__section {
-    width: 100%;
+#dino {
+    position: fixed;
+    left: 20px;
+    top: 0;
+    font-size: 80px;
+    z-index: 1000;
 }
 
-.project__video {
-    width: 24%;
+#chickencar {
+    position: fixed;
+    left: 0;
+    bottom: 40px;
+    font-size: 70px;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    align-items: center;
 }
 
-.project__image {
-    width: 49%;
-    min-width: 320px;
+#chickencar .chicken,
+#chickencar .car {
+    font-size: 60px;
 }
 
-@media (max-width: 610px){
-    .project__video {
-    width: 360px;
-    margin-top: 20px;
-}
-}
-
-#sage{
-    animation-name: move;
-    animation-duration: 15s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes move{
-    0% {
-        transform: translateX(0vh);
-    }
-    18% {
-        transform: translateX(12vh);
-    }
-    36%{
-        transform: translateX(-12vh);
-    }
-    54%{
-        transform: translateX(38vh);
-    }
-    70%{
-        transform: translateX(-38vh);
-    }
-
+#crash {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    font-size: 90px;
+    z-index: 1001;
+    transform: translateX(-50%);
+    display: none;
 }

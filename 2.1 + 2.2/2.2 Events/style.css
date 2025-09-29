@@ -1,0 +1,36 @@
+body {
+    background-color: silver;
+    font-family: fantasy;
+    height: 3000px;
+}
+
+.project__heading {
+    font-size: 36px;
+    text-align: center;
+}
+
+
+.project__containter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project__counter {
+    font-size: 72px;
+}
+
+.project__button {
+    background-color: lightblue;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.project__extra {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 100px 0;
+}

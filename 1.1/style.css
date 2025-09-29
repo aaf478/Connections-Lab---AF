@@ -1,0 +1,74 @@
+body {
+    padding: 20px;
+    background-color: blanchedalmond;
+    font-family: "Onest", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 222;
+    font-style: normal;
+}
+
+.project__section {
+    width: 100%;
+    margin: 40px 0;
+    background-color: deepskyblue;
+    border-radius: 5px; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.project__heading {
+    color: green;
+}
+
+.project__desc {
+    width: 49%;
+    display: inline-block; 
+    margin: 0;
+    font-weight: 900;
+}
+
+.video__section {
+    width: 100%;
+}
+
+.project__video {
+    width: 24%;
+}
+
+.project__image {
+    width: 49%;
+    min-width: 320px;
+}
+
+@media (max-width: 610px){
+    .project__video {
+    width: 360px;
+    margin-top: 20px;
+}
+}
+
+#sage{
+    animation-name: move;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes move{
+    0% {
+        transform: translateX(0vh);
+    }
+    18% {
+        transform: translateX(12vh);
+    }
+    36%{
+        transform: translateX(-12vh);
+    }
+    54%{
+        transform: translateX(38vh);
+    }
+    70%{
+        transform: translateX(-38vh);
+    } }

@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "A musical website for YouTube celebrities",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501
+	}
+}

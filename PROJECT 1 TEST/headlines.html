@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BREAKING NEWS!!!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        .headline {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            white-space: nowrap;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: fly linear infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+
+        #loading {
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">...</div>
+
+    <script>
+        let headlinesData = [];
+
+        
+        async function fetchHeadlines() {
+            try {
+              
+                const responses = await Promise.all([
+                    fetch('https://www.reddit.com/r/worldnews.json?limit=100'),
+                    fetch('https://www.reddit.com/r/news.json?limit=100'),
+                    fetch('https://www.reddit.com/r/Palestine.json?limit=50'),
+                    fetch('https://www.reddit.com/r/israel.json?limit=50')
+                ]);
+                
+                const dataArrays = await Promise.all(responses.map(r => r.json()));
+                
+                
+                let allPosts = [];
+                dataArrays.forEach(data => {
+                    if (data.data && data.data.children) {
+                        allPosts = allPosts.concat(data.data.children);
+                    }
+                });
+                
+                // what headlines to search for
+
+                const keywords = ['gaza', 'palestine', 'palestinian', 'israel', 'hamas', 'west bank', 'middle east', 'idf', 'ceasefire', 'humanitarian'];
+                headlinesData = allPosts
+                    .map(post => post.data.title)
+                    .filter(title => {
+                        const lowerTitle = title.toLowerCase();
+                        return keywords.some(keyword => lowerTitle.includes(keyword));
+                    });
+                
+                // If we got headlines, start the animation
+                if (headlinesData.length > 0) {
+                    document.getElementById('loading').style.display = 'none';
+                    startHeadlines();
+                } else {
+                    // Fallback if no Gaza-related headlines found
+                    headlinesData = [
+                         "VIVA LA REVOLUCIÒN",
+                    "OUR TAXES ARE FUNDING A GENOCIDE.",
+                    "To be silent is to be complicit."
+                    ];
+                    document.getElementById('loading').style.display = 'none';
+                    startHeadlines();
+                }
+            } catch (error) {
+                console.error('Error fetching headlines:', error);
+                headlinesData = [
+                    "VIVA LA REVOLUCIÒN",
+                    "OUR TAXES ARE FUNDING A GENOCIDE.",
+                    "To be silent is to be complicit."
+                ];
+                document.getElementById('loading').style.display = 'none';
+                startHeadlines();
+            }
+        }
+
+        function createHeadline() {
+            if (headlinesData.length === 0) return;
+            
+            const headline = document.createElement('div');
+            headline.className = 'headline';
+            headline.textContent = headlinesData[Math.floor(Math.random() * headlinesData.length)];
+            
+            // Random vertical position
+            headline.style.top = Math.random() * 90 + '%';
+            
+            // Random color
+            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFA500'];
+            headline.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random speed
+            const duration = 8 + Math.random() * 8;
+            headline.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(headline);
+            
+            // Remove after animation
+            setTimeout(() => {
+                headline.remove();
+            }, duration * 1000);
+        }
+
+        function startHeadlines() {
+            // Create headlines continuously
+            setInterval(createHeadline, 800);
+            
+            // Create initial batch
+            for (let i = 0; i < 5; i++) {
+                setTimeout(createHeadline, i * 300);
+            }
+        }
+
+        // Fetch headlines when page loads
+        fetchHeadlines();
+    </script>
+</body>
+</html>
